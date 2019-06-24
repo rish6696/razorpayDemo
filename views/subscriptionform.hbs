@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        window.onload = function () {
+            console.log('{{subscription_id}}')
+
+
+
+            var options = {
+                "key": "rzp_test_Tt0oK4OzD1hgTr",
+                "subscription_id": '{{subscription_id}}',
+                "name": "CommereceUp",
+                "description": "Monthly Test Plan",
+                "handler": function (response) {
+
+                    if (response.razorpay_payment_id) {
+                        fetch('http://localhost:4569/sresult', {
+                            method: 'POST', // or 'PUT'
+                            body: JSON.stringify(response), // data can be `string` or {object}!
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(x => x.json())
+                        .then((data) => {
+                            if(data.success===true)
+                            {
+                                window.location="https://www.google.com/"
+                            }
+                           
+                            
+                        }).catch(err => console.log(err))
+                    }
+                    else {
+                        console.log('not working')
+                    }
+                },
+                "prefill": {
+                    "name": "rishabh sharma",
+                    "email": "rish6696.rs@gmail.com"
+                },
+                "notes": {
+                    "note_key": "Tea. Earl Grey. Hot"
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            var button = document.getElementById('btn');
+
+
+            button.onclick = function (e) {
+                rzp1.open();
+                e.preventDefault();
+            }
+            button.click()
+        };
+    </script>
+</head>
+
+<body>
+    <button id="btn">Pay</button>
+</body>
+
+</html>

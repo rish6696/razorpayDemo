@@ -1,10 +1,12 @@
 
 const express=require('express');
 const app=express();
+const cors=require('cors');
 const request=require('request');
 
 app.set('view engine','hbs');
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 const Razorpay=require('razorpay');
 const instance =new Razorpay({
@@ -70,11 +72,36 @@ app.use('/createsubscription',(req,res)=>{
     "start_at": 1561852800,
     "addons": []
     }).then((data)=>{
-        res.send(data)
+        console.log(data)
+        res.render('subscriptionform',{
+            subscription_id:data.id
+        })
     }).catch((err)=>{
         res.send(err)
     })
 
+})
+
+app.post('/sresult',(req,res)=>{
+    console.log('result request recieved');
+    console.log(req.body);
+    // res.json({
+    //     success:true
+    // })
+    instance.payments.capture(req.body.razorpay_payment_id,500)
+    .then(()=>{
+        res.json({
+            success:true
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    
+})
+
+app.get('/',(req,res)=>{
+    res.send('Welcome to the hommepage')
 })
 
 
