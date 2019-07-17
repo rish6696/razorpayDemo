@@ -1,6 +1,6 @@
 
 
-var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-accounts').aggregate([
+ var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-accounts').aggregate([
     {
         $facet:{
             Local:[
@@ -36,6 +36,42 @@ var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-accounts').aggregate([
                     $count:"Total"
                 }
 
+            ],
+            signUp:[
+                {
+                   $match:{
+                       source:"local",
+                       $or:[{
+                          fromGuest:{$exists:false}
+                       },
+                       {
+                           fromGuest:false
+                       }]
+                   }
+                },{
+                    $count:"count"
+                }
+                
+            ],
+            registeredViaGuest:[
+                {
+                   $match:{
+                       source:"local",
+                       fromGuest:true
+                   }
+                },{
+                    $count:"count"
+                }
+                
+            ],
+            guest:[
+                {
+                    $match:{
+                        source:'guest'
+                    }
+                },{
+                    $count:"count"
+                }
             ]
 
         }

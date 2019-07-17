@@ -1,15 +1,6 @@
 
 
 var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-orders').aggregate([
-    // {
-    //     $match:{
-    //         createdAt:{
-    //             $gte:new Date("2019-04-18T04:00:00Z"), 
-    //             $lt: new Date("2019-07-02T04:00:00Z") 
-    //            }
-
-    //     }
-    // },
     {
         $unwind:"$items"
 
@@ -18,6 +9,25 @@ var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-orders').aggregate([
         $group:{
             _id:{ $dateToString: { format: "%d-%m-%Y", date: "$createdAt" } },
             TotalQuantity:{$sum:"$items.quantity"}
+        }
+    },
+    {
+        $project:{
+            date: {
+                $dateFromString: {
+                   dateString: '$_id'
+                }
+             },
+             TotalQuantity:1
+        }
+    },{
+        $sort:{
+            date:-1
+        }
+    },
+    {
+        $project:{
+            _id:0
         }
     }
 ])

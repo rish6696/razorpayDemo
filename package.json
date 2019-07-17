@@ -1,7 +1,6 @@
 {
   "name": "rishabh_web",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,8 +10,21 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "elastic-builder": "^2.3.1",
+    "elasticsearch": "^16.3.0",
     "express": "^4.17.1",
     "hbs": "^4.0.4",
-    "razorpay": "^2.0.4"
-  }
+    "razorpay": "^2.0.4",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rish6696/razorpayDemo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rish6696/razorpayDemo/issues"
+  },
+  "homepage": "https://github.com/rish6696/razorpayDemo#readme",
+  "description": ""
 }
