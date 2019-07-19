@@ -2,7 +2,7 @@
 
 
 
-var data = db.projects.find()
+var data = db.projects.find({},{nameHash:1})
 
 while (data.hasNext()) {
 printjson(data.next())
