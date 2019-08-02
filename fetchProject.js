@@ -2,10 +2,13 @@
 
 
 
-var data = db.projects.find({},{nameHash:1})
+//var data = db.projects.find({},{publisher:1})
+const array=[ObjectId("5adf1e431a41ef8a0d8cb24f"),ObjectId("5adf1e431a41ef8a0d8cb24f")];
+var data=db.publishers.find({_id :{$in:[ObjectId("5adf1e431a41ef8a0d8cb24f"),ObjectId("5adf1e431a41ef8a0d8cb24f")]}})
+//5d0221968fb1cc39a9fd7f0f
 
 while (data.hasNext()) {
-printjson(data.next())
+  printjson(data.next())
 }
 
 

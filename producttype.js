@@ -96,23 +96,7 @@ let constant = {
 
 
 
-var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-products').aggregate([
-        
-    {
-        $match:{
-                 created_date:{
-                  $gte:new Date('2019-06-20T04:00:00Z'), 
-                  $lt: new Date('2019-06-22T04:00:00Z') 
-              }
-        }
-    },
-    {
-        $group:{
-            _id:"$type",
-            count:{$sum:1}
-        }
-    }
- ])
+var data = db.getCollection('ryJHbl4P4BkeJH-lEv4-products').find({})
 
  while (data.hasNext()) {
     printjson(data.next())

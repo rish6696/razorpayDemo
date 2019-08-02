@@ -1,4 +1,2 @@
-const data=db.getCollection('HJwYVrdVQHJevKES_VQ-products').find({},{_id:1}).limit(1)
-while (data.hasNext()) {
-    printjson(data.next())
-   }
+const m=Date.parse("2019-06-25T00:00:00.000Z")
+console.log(new Date(m))
